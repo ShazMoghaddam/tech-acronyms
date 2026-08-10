@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech Acronyms, Decoded</title>
+<meta name="description" content="A searchable field guide to the abbreviations that fly around tech, grouped by field with a plain-English gloss on every one.">
+<link rel="canonical" href="https://shazmoghaddam.github.io/tech-acronyms/">
+<meta property="og:title" content="Tech Acronyms, Decoded">
+<meta property="og:description" content="A searchable field guide to 270+ tech abbreviations, across engineering, data, cloud, security and startups. Plain-English on every one.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shazmoghaddam.github.io/tech-acronyms/">
+<meta property="og:image" content="https://shazmoghaddam.github.io/tech-acronyms/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tech Acronyms, Decoded">
+<meta name="twitter:description" content="A searchable field guide to 270+ tech abbreviations, grouped by field with a plain-English gloss on every one.">
+<meta name="twitter:image" content="https://shazmoghaddam.github.io/tech-acronyms/preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,opsz,wght@1,6..72,400;0,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFEFE9;
+    --paper-2:#F6F6F1;
+    --ink:#17181C;
+    --ink-soft:#4A4C54;
+    --ink-faint:#83868F;
+    --line:#D9D9D0;
+    --line-2:#E6E6DE;
+    --accent:#4338E8;
+    --accent-soft:#EDECFB;
+    --shadow:0 1px 0 rgba(23,24,28,.04), 0 8px 24px -18px rgba(23,24,28,.35);
+    --r:14px;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Space Grotesk",system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+
+  /* ---------- HERO ---------- */
+  header{
+    padding:64px 0 30px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(67,56,232,.06), transparent 60%),
+      var(--paper);
+  }
+  .eyebrow{
+    font-family:"Space Mono",monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h1{
+    font-weight:700;
+    font-size:clamp(2.6rem,7vw,5rem);
+    line-height:.98;
+    letter-spacing:-.03em;
+    margin:0;
+  }
+  h1 .slash{color:var(--accent)}
+  .lede{
+    max-width:52ch;
+    margin:22px 0 0;
+    font-size:clamp(1rem,2.2vw,1.18rem);
+    color:var(--ink-soft);
+    line-height:1.55;
+  }
+  .lede-count{color:var(--ink);font-weight:600;white-space:nowrap}
+
+  /* decoder demo */
+  .decoder{
+    margin-top:30px;
+    display:inline-flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    padding:14px 18px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:999px;
+    box-shadow:var(--shadow);
+    min-height:58px;
+  }
+  .decoder .tok{
+    font-family:"Space Mono",monospace;
+    font-weight:700;
+    font-size:1.05rem;
+    letter-spacing:.02em;
+    background:var(--ink);
+    color:var(--paper-2);
+    padding:6px 12px;
+    border-radius:8px;
+    white-space:nowrap;
+  }
+  .decoder .arrow{color:var(--accent);font-weight:700}
+  .decoder .exp{
+    font-family:"Newsreader",Georgia,serif;
+    font-style:italic;
+    font-size:1.12rem;
+    color:var(--ink);
+  }
+  .decoder.swap .tok,.decoder.swap .exp{opacity:0}
+  .decoder .tok,.decoder .exp{transition:opacity .28s ease}
+
+  /* ---------- CONTROLS ---------- */
+  .controls{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:16px 0;
+  }
+  .search{
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .search svg{position:absolute;left:16px;width:18px;height:18px;stroke:var(--ink-faint);pointer-events:none}
+  #q{
+    width:100%;
+    font-family:"Space Grotesk",sans-serif;
+    font-size:1rem;
+    color:var(--ink);
+    padding:14px 16px 14px 44px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  #q::placeholder{color:var(--ink-faint)}
+  #q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+  }
+  .chip{
+    flex:0 0 auto;
+    font-family:"Space Grotesk",sans-serif;
+    font-size:.86rem;
+    font-weight:500;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:7px 14px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    white-space:nowrap;
+    transition:background .15s,color .15s,border-color .15s;
+  }
+  .chip .cdot{width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+  .chip .star{width:12px;height:12px;fill:var(--accent);flex:0 0 auto}
+  .chip[aria-pressed="true"] .star{fill:currentColor}
+  .chip:hover{border-color:var(--ink-faint)}
+  .chip[aria-pressed="true"]{
+    background:var(--ink);
+    color:var(--paper-2);
+    border-color:var(--ink);
+  }
+  .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ---------- SECTIONS ---------- */
+  main{padding:14px 0 40px}
+  .count{
+    font-family:"Space Mono",monospace;
+    font-size:12.5px;
+    letter-spacing:.02em;
+    color:var(--ink-faint);
+    padding:20px 0 4px;
+  }
+  .cat{padding:26px 0 6px;scroll-margin-top:150px}
+  .cat-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin:0 0 18px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line-2);
+  }
+  .cat-head .dot{width:11px;height:11px;border-radius:50%;background:var(--c);transform:translateY(1px)}
+  .cat-head h2{
+    font-size:clamp(1.25rem,3vw,1.6rem);
+    font-weight:600;
+    letter-spacing:-.02em;
+    margin:0;
+  }
+  .cat-head .n{
+    font-family:"Space Mono",monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-left:auto;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(288px,1fr));
+    gap:10px;
+  }
+  .entry{
+    background:var(--paper-2);
+    border:1px solid var(--line-2);
+    border-radius:var(--r);
+    padding:15px 16px 16px;
+    transition:border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .entry:hover{
+    border-color:color-mix(in srgb,var(--c) 55%, var(--line));
+    box-shadow:var(--shadow);
+    transform:translateY(-1px);
+  }
+  .entry .term{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    margin-bottom:8px;
+  }
+  .entry .cdot{width:7px;height:7px;border-radius:50%;background:var(--c);flex:0 0 auto}
+  .entry .ac{
+    font-family:"Space Mono",monospace;
+    font-weight:700;
+    font-size:1.02rem;
+    letter-spacing:.01em;
+    color:var(--ink);
+    word-break:break-word;
+  }
+  .entry .mean{
+    font-weight:500;
+    font-size:.95rem;
+    color:var(--ink);
+    margin:0 0 4px;
+  }
+  .entry .exp{
+    font-family:"Newsreader",Georgia,serif;
+    font-style:italic;
+    font-size:.98rem;
+    line-height:1.4;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  mark{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:0 1px}
+
+  .noresults{
+    display:none;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-faint);
+  }
+  .noresults .big{font-family:"Space Mono",monospace;font-size:1.1rem;color:var(--ink-soft);margin-bottom:6px}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0 46px;
+    margin-top:20px;
+  }
+  .foot{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .foot .by{font-size:.95rem;color:var(--ink-soft)}
+  .foot .by b{color:var(--ink);font-weight:600}
+  .foot nav{display:flex;gap:8px;flex-wrap:wrap}
+  .foot a{
+    font-family:"Space Mono",monospace;
+    font-size:.8rem;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:7px 13px;
+    transition:border-color .15s,color .15s;
+  }
+  .foot a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* keyboard hint in search */
+  .kbd{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    font-family:"Space Mono",monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:2px 7px;
+    background:var(--paper);
+    pointer-events:none;
+    transition:opacity .15s;
+  }
+  #q:focus ~ .kbd{opacity:0}
+
+  /* back to top */
+  .totop{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--ink);
+    color:var(--paper-2);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(10px);
+    pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    box-shadow:var(--shadow);
+    z-index:40;
+  }
+  .totop.show{opacity:1;transform:none;pointer-events:auto}
+  .totop:hover{background:var(--accent)}
+  .totop svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .totop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  @media (max-width:560px){.kbd{display:none}}
+
+  /* hero action buttons */
+  .actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+  .btn{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:.92rem;font-weight:500;
+    display:inline-flex;align-items:center;gap:8px;
+    cursor:pointer;
+    padding:11px 16px;border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--paper-2);color:var(--ink);
+    transition:border-color .15s,background .15s,color .15s;
+  }
+  .btn:hover{border-color:var(--ink-faint)}
+  .btn.primary{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+  .btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+  .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* copied toast */
+  .toast{
+    position:fixed;left:50%;bottom:26px;
+    transform:translate(-50%,20px);
+    background:var(--ink);color:var(--paper-2);
+    font-family:"Space Mono",monospace;font-size:.82rem;
+    padding:10px 16px;border-radius:999px;
+    opacity:0;pointer-events:none;
+    transition:opacity .2s,transform .2s;z-index:60;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* print / save-as-PDF layout */
+  @media print{
+    .controls,.totop,.actions,.toast,.decoder,.eyebrow{display:none!important}
+    header{border:none;padding:8px 0 10px;background:none}
+    h1{font-size:2.4rem}
+    .cat{padding:14px 0 2px}
+    .grid{grid-template-columns:repeat(2,1fr);gap:6px}
+    .entry{break-inside:avoid;border:1px solid #ddd;box-shadow:none;background:none;padding:8px 10px}
+    .entry:hover{transform:none;box-shadow:none}
+    body{background:#fff}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+
+  @media (max-width:560px){
+    header{padding:44px 0 24px}
+    .decoder{width:100%;border-radius:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">A field guide</p>
+    <h1>Tech acronyms,<br>decoded<span class="slash">.</span></h1>
+    <p class="lede">The abbreviations that fly around engineering, data, cloud and startup rooms, gathered in one place: <strong class="lede-count" id="heroCount">251 terms across 7 fields</strong>, each with a plain-English gloss. Search it, skim it, bookmark it.</p>
+    <div class="decoder" id="decoder" aria-live="polite">
+      <span class="tok" id="dTok">API</span>
+      <span class="arrow">→</span>
+      <span class="exp" id="dExp">Application Programming Interface</span>
+    </div>
+    <div class="actions">
+      <button class="btn primary" id="shareBtn" type="button">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+        Share
+      </button>
+      <button class="btn" id="pdfBtn" type="button">
+        <svg viewBox="0 0 24 24"><path d="M12 3v12M8 11l4 4 4-4M4 19h16"/></svg>
+        Save as PDF
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Search 250+ terms — try 'API', 'market', 'auth'…" autocomplete="off" aria-label="Search acronyms">
+      <span class="kbd" aria-hidden="true">/</span>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <p class="count" id="count"></p>
+    <div id="sections"></div>
+    <div class="noresults" id="noresults">
+      <div class="big">No matches</div>
+      <div>Nothing here for that one. Try a shorter word or a different field.</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="by">Compiled by <b>Shaz Moghaddam</b> · Data Scientist &amp; Python Developer, London</div>
+    <nav>
+      <a href="https://shazmoghaddam.github.io" target="_blank" rel="noopener">Portfolio</a>
+      <a href="https://linkedin.com/in/shazmoghaddam" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/ShazMoghaddam" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Link copied</div>
+
+<button class="totop" id="totop" aria-label="Back to top" title="Back to top">
+  <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+const DATA = [
+  { id:"prog", name:"Programming & Software Development", short:"Programming", c:"#2563EB", items:[
+    ["CI/CD","Continuous Integration / Continuous Delivery (or Deployment)","Automating testing and releasing software"],
+    ["API","Application Programming Interface","Lets different software systems talk to each other"],
+    ["SDK","Software Development Kit","Tools for building applications for a platform"],
+    ["IDE","Integrated Development Environment","Software for writing and debugging code"],
+    ["CLI","Command-Line Interface","Controlling software through typed commands"],
+    ["GUI","Graphical User Interface","Visual interface users interact with"],
+    ["UI","User Interface","What the user sees and interacts with"],
+    ["UX","User Experience","How easy and enjoyable a product is to use"],
+    ["DB","Database","Where application data is stored"],
+    ["SQL","Structured Query Language","Language used to work with databases"],
+    ["CRUD","Create, Read, Update, Delete","The basic database operations"],
+    ["OOP","Object-Oriented Programming","Programming built around objects and classes"],
+    ["MVC","Model-View-Controller","A common software architecture pattern"],
+    ["ORM","Object-Relational Mapping","Connects programming objects with databases"],
+    ["JSON","JavaScript Object Notation","Common format for exchanging data"],
+    ["XML","Extensible Markup Language","Another structured data format"],
+    ["HTML","HyperText Markup Language","The structure of web pages"],
+    ["CSS","Cascading Style Sheets","Styling and layout for web pages"],
+    ["TS","TypeScript","JavaScript with static typing added"],
+    ["YAML","YAML Ain't Markup Language","Human-readable format for config and data"],
+    ["HTTP","Hypertext Transfer Protocol","Protocol used for web communication"],
+    ["REST","Representational State Transfer","A common approach for designing APIs"],
+    ["GraphQL","Graph Query Language","API query language that fetches exactly what you ask for"],
+    ["WS","WebSocket","A two-way, real-time connection between client and server"],
+    ["CORS","Cross-Origin Resource Sharing","Browser rules for requests across domains"],
+    ["SPA","Single Page Application","A web app that updates in place without full reloads"],
+    ["SSR","Server-Side Rendering","Pages rendered on the server before they reach the browser"],
+    ["URL","Uniform Resource Locator","A web address"],
+    ["DNS","Domain Name System","Converts domain names into IP addresses"],
+    ["IP","Internet Protocol","Identifies devices on a network"],
+    ["TCP/IP","Transmission Control Protocol / Internet Protocol","The core networking protocols"],
+    ["SSH","Secure Shell","Secure remote access to computers"],
+    ["SSL/TLS","Secure Sockets Layer / Transport Layer Security","Encryption for network communication"],
+    ["DRY","Don't Repeat Yourself","A principle to avoid duplicating code"],
+    ["TDD","Test-Driven Development","Writing the tests before the code"],
+    ["SOLID","Five object-oriented design principles","Guidelines for maintainable OOP code"],
+    ["regex","Regular Expression","A pattern for searching and matching text"],
+    ["UUID","Universally Unique Identifier","A unique ID for records or objects"],
+    ["VCS","Version Control System","Tracks changes to code, e.g. Git"],
+    ["CPU","Central Processing Unit","The main processor of a computer"],
+    ["RAM","Random Access Memory","The short-term working memory of a computer"],
+    ["OS","Operating System","Software that runs a computer, e.g. Linux or Windows"],
+    ["JS","JavaScript","The main programming language of the web"],
+    ["SSG","Static Site Generation","Pre-building pages into static files ahead of time"],
+    ["PWA","Progressive Web App","A website that behaves like an installable app"],
+    ["RPC","Remote Procedure Call","Calling code on another machine as if it were local"],
+    ["gRPC","gRPC Remote Procedure Call","A fast, modern RPC framework from Google"],
+    ["ACID","Atomicity, Consistency, Isolation, Durability","Guarantees that keep database transactions reliable"],
+    ["SDLC","Software Development Life Cycle","The stages of building and maintaining software"],
+    ["URI","Uniform Resource Identifier","A name or address that identifies a resource"],
+    ["I/O","Input / Output","Data going into and out of a system"],
+    ["KISS","Keep It Simple, Stupid","Favour the simplest solution that works"],
+    ["YAGNI","You Aren't Gonna Need It","Don't build something until you actually need it"],
+    ["SMTP","Simple Mail Transfer Protocol","The protocol for sending email"],
+    ["FTP","File Transfer Protocol","A protocol for moving files between machines"],
+    ["UTF-8","Unicode Transformation Format, 8-bit","The dominant way text is encoded on the web"],
+    ["SSE","Server-Sent Events","One-way, real-time updates streamed from server to browser"]
+  ]},
+
+  { id:"ai", name:"AI, Machine Learning & Data", short:"AI & Data", c:"#22C55E", items:[
+    ["AI","Artificial Intelligence","Machines performing intelligent tasks"],
+    ["AGI","Artificial General Intelligence","AI that matches human ability across most tasks"],
+    ["ML","Machine Learning","Systems that learn patterns from data"],
+    ["DL","Deep Learning","Machine learning using neural networks"],
+    ["LLM","Large Language Model","AI model trained on huge amounts of text"],
+    ["NLP","Natural Language Processing","AI that works with human language"],
+    ["CV","Computer Vision","AI that works with images and video"],
+    ["GenAI","Generative AI","AI that generates text, images, code and more"],
+    ["RAG","Retrieval-Augmented Generation","An LLM paired with external knowledge retrieval"],
+    ["RL","Reinforcement Learning","Learning through rewards and penalties"],
+    ["RLHF","Reinforcement Learning from Human Feedback","Tuning a model using human preferences"],
+    ["GPT","Generative Pre-trained Transformer","A transformer-based text generation model"],
+    ["CNN","Convolutional Neural Network","A neural network that excels at images"],
+    ["RNN","Recurrent Neural Network","A neural network for sequences and time series"],
+    ["GAN","Generative Adversarial Network","Two networks compete to generate realistic data"],
+    ["MoE","Mixture of Experts","A model that routes work to specialised sub-networks"],
+    ["OCR","Optical Character Recognition","Turning images of text into actual text"],
+    ["SVM","Support Vector Machine","A classic classification algorithm"],
+    ["KNN","K-Nearest Neighbors","Predicts based on the closest data points"],
+    ["PCA","Principal Component Analysis","Reducing data down to its key dimensions"],
+    ["EDA","Exploratory Data Analysis","Investigating data before modelling"],
+    ["RMSE","Root Mean Squared Error","A common error metric for regression"],
+    ["AUC","Area Under the Curve","A measure of classifier performance"],
+    ["ROC","Receiver Operating Characteristic","A curve for evaluating classifiers"],
+    ["ETL","Extract, Transform, Load","Moving and reshaping data into a store"],
+    ["ELT","Extract, Load, Transform","Like ETL, but transforming after loading"],
+    ["OLAP","Online Analytical Processing","Systems built for analytics queries"],
+    ["OLTP","Online Transaction Processing","Systems built for day-to-day transactions"],
+    ["DAG","Directed Acyclic Graph","A structure used to orchestrate data pipelines"],
+    ["DWH","Data Warehouse","A central store for analytics-ready data"],
+    ["GPU","Graphics Processing Unit","Hardware used heavily for AI and ML"],
+    ["TPU","Tensor Processing Unit","Hardware designed for machine-learning workloads"],
+    ["MLOps","Machine Learning Operations","Managing ML models in production"],
+    ["CSV","Comma-Separated Values","A common, simple data-file format"],
+    ["ASI","Artificial Superintelligence","Hypothetical AI beyond human intelligence"],
+    ["ANN","Artificial Neural Network","A model loosely inspired by the brain"],
+    ["LSTM","Long Short-Term Memory","An RNN that remembers longer sequences"],
+    ["BERT","Bidirectional Encoder Representations from Transformers","An influential early language model"],
+    ["MSE","Mean Squared Error","A common regression error metric"],
+    ["MAE","Mean Absolute Error","The average size of prediction errors"],
+    ["F1","F1 Score","Balances precision and recall in one number"],
+    ["SGD","Stochastic Gradient Descent","A workhorse algorithm for training models"],
+    ["TF-IDF","Term Frequency-Inverse Document Frequency","Scores how important a word is to a document"],
+    ["NER","Named Entity Recognition","Finding names, places and orgs in text"],
+    ["TTS","Text-to-Speech","Turning written text into spoken audio"],
+    ["STT","Speech-to-Text","Turning spoken audio into written text"],
+    ["CDC","Change Data Capture","Tracking and streaming changes from a database"],
+    ["MCP","Model Context Protocol","A standard for connecting AI models to tools and data"],
+    ["CoT","Chain of Thought","Prompting a model to reason step by step"],
+    ["SFT","Supervised Fine-Tuning","Training a model further on labelled examples"],
+    ["LoRA","Low-Rank Adaptation","An efficient way to fine-tune large models"],
+    ["HITL","Human in the Loop","Keeping a person involved in an automated process"],
+    ["BLEU","Bilingual Evaluation Understudy","A score for machine-translation quality"]
+  ]},
+
+  { id:"cloud", name:"Cloud, DevOps & Infrastructure", short:"Cloud & DevOps", c:"#F97316", items:[
+    ["AWS","Amazon Web Services","Amazon's cloud platform"],
+    ["GCP","Google Cloud Platform","Google's cloud platform"],
+    ["Azure","Microsoft Azure","Microsoft's cloud platform"],
+    ["VM","Virtual Machine","A virtual computer running on physical hardware"],
+    ["Docker","Docker","A containerisation platform"],
+    ["K8s","Kubernetes","A platform for managing containers"],
+    ["CaaS","Containers as a Service","Cloud-managed container hosting"],
+    ["IaC","Infrastructure as Code","Managing infrastructure through code"],
+    ["GitOps","Git-based Operations","Managing infrastructure through Git workflows"],
+    ["DevOps","Development + Operations","Practices linking development and operations"],
+    ["SRE","Site Reliability Engineering","An engineering approach to reliability"],
+    ["CDN","Content Delivery Network","Distributes content closer to users"],
+    ["VPC","Virtual Private Cloud","An isolated network inside a cloud"],
+    ["LB","Load Balancer","Spreads incoming traffic across servers"],
+    ["HA","High Availability","Designed to stay up with minimal downtime"],
+    ["SLO","Service Level Objective","A target for a service's reliability or speed"],
+    ["SLI","Service Level Indicator","A measured signal of service health"],
+    ["TTL","Time To Live","How long data or a cache stays valid"],
+    ["WAF","Web Application Firewall","Filters malicious web traffic"],
+    ["SaaS","Software as a Service","Software delivered over the internet"],
+    ["PaaS","Platform as a Service","A cloud platform for building and deploying apps"],
+    ["IaaS","Infrastructure as a Service","Cloud infrastructure such as servers and storage"],
+    ["BaaS","Backend as a Service","Cloud-provided backend functionality"],
+    ["FaaS","Function as a Service","Running individual functions without managing servers"],
+    ["S3","Simple Storage Service","Amazon's object storage service"],
+    ["EC2","Elastic Compute Cloud","Amazon's virtual server service"],
+    ["RTO","Recovery Time Objective","How fast you must recover after an outage"],
+    ["RPO","Recovery Point Objective","How much data loss you can tolerate"],
+    ["DR","Disaster Recovery","Plans for restoring service after a failure"],
+    ["APM","Application Performance Monitoring","Tracking how an app behaves in production"],
+    ["NAT","Network Address Translation","Maps private addresses to public ones"],
+    ["CIDR","Classless Inter-Domain Routing","A compact way to describe IP address ranges"]
+  ]},
+
+  { id:"biz", name:"Business, Product & Startups", short:"Business & Product", c:"#EC4899", items:[
+    ["B2B","Business-to-Business","A business sells to another business"],
+    ["B2C","Business-to-Consumer","A business sells to consumers"],
+    ["C2C","Consumer-to-Consumer","Consumers sell to consumers"],
+    ["B2G","Business-to-Government","A business sells to government"],
+    ["D2C","Direct-to-Consumer","A brand sells directly to customers"],
+    ["B2B2C","Business-to-Business-to-Consumer","Selling through another business to reach consumers"],
+    ["GTM","Go-To-Market","The plan for launching and selling a product"],
+    ["ICP","Ideal Customer Profile","The type of customer you are built to serve"],
+    ["MVP","Minimum Viable Product","The simplest version used to test an idea"],
+    ["POC","Proof of Concept","A demo showing that an idea can work"],
+    ["PMF","Product-Market Fit","The product fits a real market need"],
+    ["USP","Unique Selling Proposition","What makes a product different"],
+    ["UVP","Unique Value Proposition","The value a product provides customers"],
+    ["ROI","Return on Investment","Financial return compared with what was invested"],
+    ["CAC","Customer Acquisition Cost","What it costs to win a customer"],
+    ["LTV","Lifetime Value","Expected value of a customer over the relationship"],
+    ["ACV","Annual Contract Value","The yearly value of a customer contract"],
+    ["MRR","Monthly Recurring Revenue","Recurring revenue per month"],
+    ["ARR","Annual Recurring Revenue","Recurring revenue per year"],
+    ["ARPU","Average Revenue Per User","Average revenue generated per user"],
+    ["TAM","Total Addressable Market","The entire potential market"],
+    ["SAM","Serviceable Available Market","The share of the market you can realistically target"],
+    ["SOM","Serviceable Obtainable Market","The share you could realistically capture"],
+    ["NPS","Net Promoter Score","A measure of customer loyalty"],
+    ["SMB","Small and Medium Business","A smaller-company market segment"],
+    ["SME","Small and Medium Enterprise","The UK/EU term for smaller companies"],
+    ["VC","Venture Capital","Investment into early-stage startups"],
+    ["IPO","Initial Public Offering","When a company first sells shares publicly"],
+    ["SEO","Search Engine Optimization","Improving visibility in search results"],
+    ["SEM","Search Engine Marketing","Paid advertising on search engines"],
+    ["CTR","Click-Through Rate","The share of people who click something"],
+    ["KYC","Know Your Customer","Verifying customer identity for compliance"],
+    ["GDPR","General Data Protection Regulation","UK/EU data-privacy law"],
+    ["NDA","Non-Disclosure Agreement","A contract to keep information confidential"],
+    ["PE","Private Equity","Investment into established private companies"],
+    ["M&A","Mergers and Acquisitions","Companies combining or being bought"],
+    ["SAFE","Simple Agreement for Future Equity","A common early-stage startup funding instrument"],
+    ["PLG","Product-Led Growth","Growth driven by the product itself"],
+    ["GMV","Gross Merchandise Value","Total value of goods sold through a platform"],
+    ["CTA","Call to Action","The prompt that asks a user to act"],
+    ["CPC","Cost Per Click","What you pay for each ad click"],
+    ["CPM","Cost Per Mille","What you pay per thousand ad impressions"],
+    ["OTE","On-Target Earnings","A salesperson's expected pay at target"],
+    ["QBR","Quarterly Business Review","A periodic review with a client or team"],
+    ["CEO","Chief Executive Officer","The most senior leader of a company"],
+    ["CTO","Chief Technology Officer","The senior leader for technology"],
+    ["CFO","Chief Financial Officer","The senior leader for finance"],
+    ["COO","Chief Operating Officer","The senior leader for operations"],
+    ["CMO","Chief Marketing Officer","The senior leader for marketing"],
+    ["CPO","Chief Product Officer","The senior leader for product"],
+    ["CISO","Chief Information Security Officer","The senior leader for security"]
+  ]},
+
+  { id:"analytics", name:"Business & Analytics", short:"Analytics", c:"#EAB308", items:[
+    ["KPI","Key Performance Indicator","A metric used to measure performance"],
+    ["OKR","Objectives and Key Results","A framework for setting and tracking goals"],
+    ["BI","Business Intelligence","Using data to understand business performance"],
+    ["BA","Business Analytics / Business Analyst","Depends on context"],
+    ["DA","Data Analytics","Analysing data for insights"],
+    ["DS","Data Science","Statistics, programming and ML to extract insight"],
+    ["CRM","Customer Relationship Management","Managing customer relationships and data"],
+    ["ERP","Enterprise Resource Planning","Software to run core business operations"],
+    ["SLA","Service Level Agreement","Agreed service and performance standards"],
+    ["RFP","Request for Proposal","Asking suppliers to propose solutions"],
+    ["RFQ","Request for Quotation","A request for pricing"],
+    ["P&L","Profit and Loss","Revenue, costs and profit"],
+    ["DAU","Daily Active Users","Unique users in a day"],
+    ["MAU","Monthly Active Users","Unique users in a month"],
+    ["CVR","Conversion Rate","The share of users who complete a goal"],
+    ["YoY","Year over Year","Comparing with the same period last year"],
+    ["MoM","Month over Month","Comparing with the previous month"],
+    ["QoQ","Quarter over Quarter","Comparing with the previous quarter"],
+    ["CAGR","Compound Annual Growth Rate","Average annual growth over a period"],
+    ["WAU","Weekly Active Users","Unique users in a week"],
+    ["EBITDA","Earnings Before Interest, Taxes, Depreciation and Amortization","A measure of core profitability"],
+    ["COGS","Cost of Goods Sold","The direct costs of producing what you sell"],
+    ["ROAS","Return on Ad Spend","Revenue earned per unit of ad spend"],
+    ["AOV","Average Order Value","The average amount spent per order"],
+    ["YTD","Year-to-Date","From the start of the year until now"]
+  ]},
+
+  { id:"sec", name:"Security", short:"Security", c:"#EF4444", items:[
+    ["MFA","Multi-Factor Authentication","Using several methods to verify identity"],
+    ["2FA","Two-Factor Authentication","Two factors to verify identity"],
+    ["SSO","Single Sign-On","One login for multiple services"],
+    ["IAM","Identity and Access Management","Managing users and their permissions"],
+    ["RBAC","Role-Based Access Control","Permissions based on a user's role"],
+    ["JWT","JSON Web Token","A token commonly used for authentication"],
+    ["OAuth","Open Authorization","A framework for delegated access"],
+    ["HTTPS","HTTP Secure","Encrypted HTTP communication"],
+    ["DDoS","Distributed Denial-of-Service","An attack that overwhelms a service"],
+    ["PII","Personally Identifiable Information","Data that can identify a person"],
+    ["XSS","Cross-Site Scripting","Injecting malicious scripts into web pages"],
+    ["CSRF","Cross-Site Request Forgery","Tricking a browser into unwanted actions"],
+    ["CVE","Common Vulnerabilities and Exposures","A public catalogue of known security flaws"],
+    ["E2EE","End-to-End Encryption","Only the sender and receiver can read the message"],
+    ["SIEM","Security Information and Event Management","Central monitoring of security events"],
+    ["PKI","Public Key Infrastructure","A system for managing encryption keys and certificates"],
+    ["VPN","Virtual Private Network","A secure, private connection over the internet"],
+    ["SQLi","SQL Injection","Attacking a database through unsafe inputs"],
+    ["CVSS","Common Vulnerability Scoring System","A standard score for how severe a flaw is"],
+    ["OWASP","Open Worldwide Application Security Project","A well-known web security community and top-10 list"],
+    ["MITM","Man-in-the-Middle","Intercepting traffic between two parties"],
+    ["OTP","One-Time Password","A single-use code, often for login"],
+    ["IDS","Intrusion Detection System","Watches for suspicious activity"],
+    ["IPS","Intrusion Prevention System","Blocks suspicious activity in real time"],
+    ["ZTA","Zero Trust Architecture","Never trust by default, always verify"],
+    ["RCE","Remote Code Execution","Running attacker code on a target machine"],
+    ["SOC","Security Operations Center","The team that monitors and defends systems"],
+    ["TOTP","Time-based One-Time Password","A rotating login code from an authenticator app"],
+    ["mTLS","Mutual TLS","Both sides verify each other's certificates"]
+  ]},
+
+  { id:"pm", name:"Development & Project Management", short:"Project Mgmt", c:"#8B5CF6", items:[
+    ["Agile","Agile methodology","An iterative approach to building software"],
+    ["Scrum","Scrum framework","An Agile framework built around sprints"],
+    ["PO","Product Owner","Represents product and business priorities"],
+    ["PM","Project Manager / Product Manager","Depends on context"],
+    ["QA","Quality Assurance","Testing and ensuring software quality"],
+    ["UAT","User Acceptance Testing","Users test whether the product meets requirements"],
+    ["DoD","Definition of Done","The agreed criteria for finished work"],
+    ["PR","Pull Request","A proposed code change put up for review"],
+    ["MR","Merge Request","Same idea as a pull request"],
+    ["RFC","Request for Comments","A proposal document circulated for feedback"],
+    ["RACI","Responsible, Accountable, Consulted, Informed","A way to map who does what on a project"],
+    ["WIP","Work in Progress","Work that is currently being done"],
+    ["P0/P1/P2","Priority levels","Labels used to signal urgency"],
+    ["SOW","Statement of Work","Defines the project's work and deliverables"],
+    ["ETA","Estimated Time of Arrival","The expected delivery or completion time"],
+    ["LGTM","Looks Good To Me","A quick sign-off on a code review"],
+    ["TBD","To Be Determined","Not decided yet"],
+    ["MoSCoW","Must, Should, Could, Won't have","A way to prioritise requirements"],
+    ["WBS","Work Breakdown Structure","Splitting a project into smaller pieces"],
+    ["CR","Change Request","A formal request to change scope or requirements"],
+    ["SME","Subject Matter Expert","The go-to person for a specific area"],
+    ["EOD","End of Day","By the close of the working day"],
+    ["OOO","Out of Office","Away and not working"]
+  ]}
+];
+
+const $ = s => document.querySelector(s);
+const sectionsEl = $("#sections");
+const countEl = $("#count");
+const noresults = $("#noresults");
+let activeCat = "all";
+let query = "";
+
+// total
+const TOTAL = DATA.reduce((n,c)=>n+c.items.length,0);
+$("#q").placeholder = `Search ${TOTAL} terms — try 'API', 'market', 'auth'…`;
+const heroCount = $("#heroCount");
+if(heroCount) heroCount.textContent = `${TOTAL} terms across ${DATA.length} fields`;
+
+// build chips
+const chips = $("#chips");
+const allChip = document.createElement("button");
+allChip.className="chip"; allChip.textContent="All"; allChip.dataset.cat="all";
+allChip.setAttribute("aria-pressed","true");
+chips.appendChild(allChip);
+const ivChip=document.createElement("button");
+ivChip.className="chip chip-star"; ivChip.dataset.cat="interview";
+ivChip.setAttribute("aria-pressed","false");
+ivChip.innerHTML=`<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.7 1.4 6.8L12 17.8 5.9 20.5l1.4-6.8L2.2 9l6.9-.7z"/></svg>Interview essentials`;
+chips.appendChild(ivChip);
+DATA.forEach(cat=>{
+  const b=document.createElement("button");
+  b.className="chip"; b.dataset.cat=cat.id; b.style.setProperty("--c",cat.c);
+  b.setAttribute("aria-pressed","false");
+  b.innerHTML=`<span class="cdot"></span>${cat.short || cat.name}`;
+  chips.appendChild(b);
+});
+
+function escapeHtml(s){return s.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+function escapeRx(s){return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");}
+function highlight(text,q){
+  const e=escapeHtml(text);
+  if(!q) return e;
+  try{ return e.replace(new RegExp("("+escapeRx(q)+")","ig"),"<mark>$1</mark>"); }
+  catch(_){ return e; }
+}
+
+// build sections
+const SECTIONS = DATA.map(cat=>{
+  const sec=document.createElement("section");
+  sec.className="cat"; sec.id="sec-"+cat.id; sec.style.setProperty("--c",cat.c);
+  sec.dataset.cat=cat.id;
+  const head=document.createElement("div");
+  head.className="cat-head";
+  head.innerHTML=`<span class="dot"></span><h2>${escapeHtml(cat.name)}</h2><span class="n">${cat.items.length}</span>`;
+  const nEl=head.querySelector(".n");
+  const grid=document.createElement("div");
+  grid.className="grid";
+  const entries=cat.items.map(([ac,mean,exp])=>{
+    const el=document.createElement("article");
+    el.className="entry";
+    el.innerHTML=`<div class="term"><span class="cdot"></span><span class="ac"></span></div><p class="mean"></p><p class="exp"></p>`;
+    const acEl=el.querySelector(".ac"), meanEl=el.querySelector(".mean"), expEl=el.querySelector(".exp");
+    acEl.textContent=ac; meanEl.textContent=mean; expEl.textContent=exp;
+    grid.appendChild(el);
+    return {el, ac, mean, exp, blob:(ac+" "+mean+" "+exp).toLowerCase(), acEl, meanEl, expEl, hot:false};
+  });
+  sec.appendChild(head); sec.appendChild(grid);
+  sectionsEl.appendChild(sec);
+  return {catId:cat.id, sec, nEl, entries};
+});
+
+// filtering + highlighting
+function apply(){
+  const q=query.trim().toLowerCase();
+  let shown=0;
+  const interviewMode = activeCat==="interview";
+  const seen = new Set();
+  SECTIONS.forEach(s=>{
+    let vis=0;
+    s.entries.forEach(en=>{
+      let inScope;
+      if(interviewMode){
+        const key=en.ac.toUpperCase();
+        inScope = INTERVIEW.has(key) && !seen.has(key);
+        if(inScope) seen.add(key);
+      } else {
+        inScope = activeCat==="all" || activeCat===s.catId;
+      }
+      const match = inScope && (q==="" || en.blob.includes(q));
+      en.el.style.display = match ? "" : "none";
+      if(match){ vis++; shown++; }
+      if(q && match){
+        en.acEl.innerHTML=highlight(en.ac,q);
+        en.meanEl.innerHTML=highlight(en.mean,q);
+        en.expEl.innerHTML=highlight(en.exp,q);
+        en.hot=true;
+      } else if(en.hot && !q){
+        en.acEl.textContent=en.ac;
+        en.meanEl.textContent=en.mean;
+        en.expEl.textContent=en.exp;
+        en.hot=false;
+      }
+    });
+    s.sec.style.display = vis ? "" : "none";
+    s.nEl.textContent = vis;
+  });
+  noresults.style.display = shown ? "none" : "block";
+  const filtering = q || activeCat!=="all";
+  countEl.textContent = filtering ? `Showing ${shown} of ${TOTAL} terms` : "";
+  countEl.style.display = filtering ? "" : "none";
+}
+
+const qEl=$("#q");
+qEl.addEventListener("input",e=>{query=e.target.value;apply();});
+
+// category selection with shareable URL hash (e.g. #security)
+const CAT_IDS = DATA.map(d=>d.id);
+const INTERVIEW = new Set(["KPI","ROI","MVP","POC","PMF","API","CI/CD","LLM","RAG","MLOPS","SAAS","B2B"]);
+function selectCat(catId, scroll){
+  activeCat = (catId==="interview" || CAT_IDS.includes(catId)) ? catId : "all";
+  chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c.dataset.cat===activeCat?"true":"false"));
+  apply();
+  if(scroll){
+    window.scrollTo({top: document.querySelector(".controls").offsetTop-1, behavior:"smooth"});
+  }
+}
+chips.addEventListener("click",e=>{
+  const btn=e.target.closest(".chip"); if(!btn) return;
+  const cat=btn.dataset.cat;
+  selectCat(cat, true);
+  try{ history.replaceState(null,"", cat==="all" ? location.pathname+location.search : "#"+cat); }catch(_){}
+});
+window.addEventListener("hashchange",()=>selectCat(location.hash.slice(1)||"all", false));
+try{ selectCat(location.hash.slice(1)||"all", false); }catch(_){ selectCat("all", false); }
+
+// keyboard: "/" focuses search, Esc clears it
+document.addEventListener("keydown",e=>{
+  const typing=/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName);
+  if(e.key==="/" && !typing){ e.preventDefault(); qEl.focus(); }
+  else if(e.key==="Escape" && document.activeElement===qEl){ qEl.value=""; query=""; apply(); qEl.blur(); }
+});
+
+// back to top
+const totop=$("#totop");
+window.addEventListener("scroll",()=>totop.classList.toggle("show", window.scrollY>600),{passive:true});
+totop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+// share + save as PDF
+const toast=$("#toast");
+let toastT;
+function flash(msg){ toast.textContent=msg; toast.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>toast.classList.remove("show"),1800); }
+$("#shareBtn").addEventListener("click",async()=>{
+  const data={title:"Tech Acronyms, Decoded", text:"A searchable field guide to 270+ tech abbreviations.", url:location.href};
+  if(navigator.share){ try{ await navigator.share(data); }catch(_){} return; }
+  try{ await navigator.clipboard.writeText(location.href); flash("Link copied"); }
+  catch(_){ window.open("https://www.linkedin.com/sharing/share-offsite/?url="+encodeURIComponent(location.href),"_blank","noopener"); }
+});
+function resetForFullView(){ if(query||activeCat!=="all"){ qEl.value=""; query=""; selectCat("all",false); } }
+$("#pdfBtn").addEventListener("click",()=>{ resetForFullView(); window.print(); });
+window.addEventListener("beforeprint",resetForFullView);
+
+// hero decoder cycle
+const demo=[
+  ["RAG","Retrieval-Augmented Generation"],
+  ["K8s","Kubernetes"],
+  ["CI/CD","Continuous Integration / Delivery"],
+  ["TAM","Total Addressable Market"],
+  ["OAuth","Open Authorization"],
+  ["MRR","Monthly Recurring Revenue"],
+  ["LLM","Large Language Model"]
+];
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(!reduce){
+  const dec=$("#decoder"), tok=$("#dTok"), exp=$("#dExp");
+  let i=0;
+  setInterval(()=>{
+    dec.classList.add("swap");
+    setTimeout(()=>{
+      i=(i+1)%demo.length;
+      tok.textContent=demo[i][0];
+      exp.textContent=demo[i][1];
+      dec.classList.remove("swap");
+    },300);
+  },2800);
+}
+</script>
+</body>
+</html>
